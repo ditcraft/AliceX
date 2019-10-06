@@ -111,15 +111,18 @@ export default class ditCraft extends Component {
 		let modalInfo;
 		if(this.state.selectedItem){
 			modalInfo = <View style={{padding: 10}}>
+					<TouchableOpacity onPress={this.hideModal} style={{alignItems: 'flex-end'}}>
+						<Image source={require('./Assets/Icons/close-2.png')}/>
+					</TouchableOpacity>
 					<Text style={{color: '#fff'}}>
 						<Text style={{fontWeight: 'bold', color: '#fff'}}>[#{this.state.selectedItem.knw_vote_id}] </Text>
 						<Text>{this.state.selectedItem.topic}</Text>
 					</Text>
 					<Text style={{color: '#fff'}}>
-						<Text>Over at </Text>
+						<Text>Vote ending at </Text>
 						<Text style={{fontWeight: 'bold'}}>{moment(this.state.selectedItem.reveal_phase_end).format('HH:mm:ss DD.MM.YYYY')}</Text>
 					</Text>
-					<View style={{flexDirection: 'row',}}>
+					<View style={{flexDirection: 'row'}}>
 						<TouchableOpacity onPress={this.voteUp}>
 							<Image source={require('./Assets/Icons/arrow-up-bold-box-outline.png')}/>
 						</TouchableOpacity>

@@ -5,9 +5,11 @@ import {
   Text,
   Modal,
   View,
+  Dimensions
 } from 'react-native';
 import t from 'prop-types';
 
+const { height, width } = Dimensions.get('window');
 
 class MyModal extends React.Component {
   static propTypes = {
@@ -27,17 +29,29 @@ class MyModal extends React.Component {
     const { props } = this;
     return (
       <View>
-        <Modal
+        <Modal style = {{  margin: 0 }}
           visible={props.visible}
           transparent={props.transparent}
           onRequestClose={props.dismiss}
           animationType={props.animationType}
-        >
-        <TouchableWithoutFeedback onPress={props.dismiss}>
-          <View style={styles.modalOverlay} />
-        </TouchableWithoutFeedback>
-        <View style={styles.modalContent}>
-          {props.children}
+          onBackdropPress={props.dismiss}
+          >
+          <View style={{
+          flex: 1,
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          paddingTop: 0}}>
+            <TouchableWithoutFeedback onPress={props.dismiss}>
+              <View style={styles.modalOverlay} />
+            </TouchableWithoutFeedback>
+            <View style={{
+                  width: 400,
+                  height: 250}}>
+            <View style={styles.modalContent}>
+              {props.children}
+            </View>
+          </View>
         </View>
         </Modal>
       </View>
@@ -51,8 +65,7 @@ const styles = StyleSheet.create({
     margin: '7%',
     backgroundColor: '#2f3f6d',
     color: 'white',
-    borderRadius: 10,
-    marginTop: 35
+    borderRadius: 10
   },
   modalOverlay: {
     position: 'absolute',
